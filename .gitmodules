@@ -1,0 +1,3 @@
+[submodule "ObjectRepo"]
+	path = ObjectRepo
+	url = http://192.168.56.125:7990/scm/zwcad_t/objectrepo.git
