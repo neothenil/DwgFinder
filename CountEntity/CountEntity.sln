@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CountEntity", "CountEntity.vcxproj", "{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		ArxRelease|x64 = ArxRelease|x64
+		ArxRelease|x86 = ArxRelease|x86
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.ArxRelease|x64.ActiveCfg = ArxRelease|x64
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.ArxRelease|x64.Build.0 = ArxRelease|x64
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.ArxRelease|x86.ActiveCfg = ArxRelease|Win32
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.ArxRelease|x86.Build.0 = ArxRelease|Win32
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Debug|x64.ActiveCfg = Debug|x64
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Debug|x64.Build.0 = Debug|x64
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Debug|x86.Build.0 = Debug|Win32
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Release|x64.ActiveCfg = Release|x64
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Release|x64.Build.0 = Release|x64
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Release|x86.ActiveCfg = Release|Win32
+		{B5A90600-33E1-46D4-B1F1-7699FA9F7CD3}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D50DD1A-1726-4697-87DA-E16F5DEEE477}
+	EndGlobalSection
+EndGlobal
