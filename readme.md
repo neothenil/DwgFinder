@@ -5,7 +5,7 @@ DwgFinder的客户端是一个网页，在浏览器中打开就可以使用。
 
 DwgFinder的搜索语句与在JIRA中搜索问题时使用的JQL类似，例如下面的语句用来查找所有块参照数量 > 50000的图纸，并按照块参照数量降序排列：
 ```
-AcDbBlockRerence > 50000 order by AcDbBlockReference DESC
+AcDbBlockReference > 50000 order by AcDbBlockReference DESC
 ```
 
 通过搜索语句找到图纸之后，可以点击图纸的Path列下载单个图纸，也可以点击`Download All`下载所有图纸。
