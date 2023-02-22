@@ -12,6 +12,8 @@ from flask import (
     send_from_directory,
     abort,
     current_app,
+    stream_with_context,
+    Response,
 )
 
 from .db import get_db, close_db, tableColumns, tableColumnsNoCase
@@ -91,6 +93,16 @@ def clean_temp_files():
             continue
 
 
+def read_file_chunks(path):
+    with open(path, "rb") as f:
+        while True:
+            buf = f.read(8192)
+            if buf:
+                yield buf
+            else:
+                break
+
+
 @app.route("/download/<string:query>")
 def download_by_query(query: str):
     clean_temp_files()
@@ -117,4 +129,8 @@ def download_by_query(query: str):
             except:
                 continue
             temp_zip.write(path, rel_path)
-    return send_from_directory(temp_path.parent, temp_path.name, as_attachment=True)
+    response = Response(
+        stream_with_context(read_file_chunks(temp_path)), mimetype="application/zlib"
+    )
+    response.headers["Content-Disposition"] = f"attachment; filename={temp_path.name}"
+    return response
