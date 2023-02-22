@@ -14,3 +14,7 @@ def main():
         watcher.stop()
     worker.join()
     watcher.join()
+
+
+if __name__ == "__main__":
+    main()

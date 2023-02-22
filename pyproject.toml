@@ -11,6 +11,7 @@ comtypes = "^1.1"
 psutil = "^5.9.4"
 watchdog = "^2.2.1"
 pywin32 = "^305"
+flask = "^2.2.3"
 
 
 [build-system]

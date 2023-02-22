@@ -27,6 +27,7 @@ def readTableColumns():
 def createTable():
     db = sqlite3.connect(dbPath)
     cur = db.cursor()
+    cur.execute(f"DROP TABLE IF EXISTS {tableName}")
     readTableColumns()
     strColumns = "id INTEGER PRIMARY KEY AUTOINCREMENT," + "path TEXT UNIQUE"
     for clsName in tableColumns:

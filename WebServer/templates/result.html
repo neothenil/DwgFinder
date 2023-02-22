@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block links %}
+{% if result|length > 0 %}
+<a href="{{ url_for('download_by_query', query=query) }}" target="_blank">Download All</a>
+{% endif %}
+<a href="http://192.168.56.125:7990/projects/ZWCAD_W/repos/productmanage/browse/03-Tools/DwgFinder/DwgFinder" target="_blank">Help</a>
+{% endblock %}
+
+{% block result %}
+<div class="limiter">
+  <div class="container-table100">
+  <div class="wrap-table100">
+  <div class="table100">
+  <table>
+  <thead>
+  <tr class="table100-head">
+  {% for column in columns %}
+    {% if column|lower == "path" %}
+    <th class="long-column">{{ column }}</th>
+    {% else %}
+    <th class="short-column">{{ column }}</th>
+    {% endif %}
+  {% endfor %}
+  </tr>
+  </thead>
+  <tbody>
+  {% for row in result %}
+  <tr>
+  {% for column in columns %}
+    {% if column|lower() == "path" %}
+    <td class="long-column">
+      <a href="{{ url_for('download', id=row['ID']) }}" target="_blank">{{ row[column] }}</a>
+    </td>
+    {% else %}
+    <td class="short-column">{{ row[column] }}</td>
+    {% endif %}
+  {% endfor %}
+  </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+{% endblock %}
