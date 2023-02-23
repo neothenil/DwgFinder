@@ -1,0 +1,16 @@
+{
+    "db_path": "D:/test.db",
+    "db_table": "EntityCount",
+    "watched_path": "D:/testFiles",
+    "zwcad_exe": "D:/Program Files/ZWSOFT/ZWCAD 2023/ZWCAD.exe",
+    "zwcad_args": [
+        "/company",
+        "ZWSoft",
+        "/product",
+        "zwcad",
+        "/language",
+        "en-US"
+    ],
+    "zwcad_window_title": ".*ZWCAD 2023 Pro.*",
+    "worker_time_interval": 30
+}

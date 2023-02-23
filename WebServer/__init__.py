@@ -1,4 +1,5 @@
 import os
+import json
 import zipfile
 import tempfile
 from pathlib import Path
@@ -18,11 +19,16 @@ from flask import (
 
 from .db import get_db, close_db, tableColumns, tableColumnsNoCase
 
+
+config_file = Path(os.getcwd()) / "config.json"
+with open(config_file) as f:
+    config = json.load(f)
+
 app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY="fQ_yLyrcjLeyEFUqGw0Izw",
-    DATABASE="D:/test.db",
-    WATCHED_PATH=Path("D:/testfiles/"),
+    DATABASE=config["db_path"],
+    WATCHED_PATH=Path(config["watched_path"]),
 )
 app.teardown_appcontext(close_db)
 
@@ -55,7 +61,7 @@ def search():
                 columns.append(tableColumns[index])
     db = get_db()
     # SQL injection vulnerable
-    sql = f"select * from entitycount where {query};"
+    sql = f"select * from {config['db_table']} where {query};"
     try:
         result = db.execute(sql).fetchall()
     except Exception as e:
@@ -67,7 +73,7 @@ def search():
 @app.route("/download/<int:id>")
 def download(id: int):
     db = get_db()
-    sql = f"select * from entitycount where id = {id};"
+    sql = f"select * from {config['db_table']} where id = {id};"
     try:
         result = db.execute(sql).fetchone()
     except:
@@ -110,7 +116,7 @@ def download_by_query(query: str):
         abort(404)
     db = get_db()
     # SQL injection vulnerable
-    sql = f"select * from entitycount where {query};"
+    sql = f"select * from {config['db_table']} where {query};"
     try:
         result = db.execute(sql).fetchall()
     except:

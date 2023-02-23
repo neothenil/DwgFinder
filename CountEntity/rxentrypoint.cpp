@@ -8,9 +8,34 @@
 #include "helloworld.h"
 #include "CountEntityCmd.h"
 
+rapidjson::Document gConfig;
+
+void initConfig()
+{
+	const AcString defaultConfig = "{\"db_path\": \"D:/test.db\", \"db_table\" : \"EntityCount\"}";
+	TCHAR currentDir[MAX_PATH];
+	GetCurrentDirectory(MAX_PATH, currentDir);
+	AcString configPath = currentDir;
+	configPath += "\\config.json";
+	CFileStatus status;
+	if (!CFile::GetStatus(configPath, status) || status.m_attribute == CFile::directory) {
+		acutPrintf(_T("\nFile %s does not exist. Use default config."), configPath.kTCharPtr());
+		gConfig.Parse(defaultConfig.utf8Ptr());
+		return;
+	}
+	CFile configFile(configPath, CFile::modeRead);
+	ULONGLONG fileSize = configFile.GetLength();
+	auto content = new char[fileSize + 1];
+	configFile.Read(content, fileSize + 1);
+	configFile.Close();
+	gConfig.Parse(content);
+	delete[] content;
+}
+
 
 void initapp()
 {
+	initConfig();
 	acedRegCmds->addCommand(cmd_group_name, _T("helloworld"), _T("helloworld"), ACRX_CMD_MODAL, helloworld);
 	acedRegCmds->addCommand(cmd_group_name, _T("countEntity"), _T("countEntity"), ACRX_CMD_MODAL, countEntityCmd);
 }

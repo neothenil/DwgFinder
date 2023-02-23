@@ -8,16 +8,15 @@ from datetime import datetime, timedelta
 from . import uiautomation as auto
 
 from .zwcad import Zwcad
-from .common import watched_path
+from .common import watched_path, worker_time_interval
 from .common import execute_sql
 from .common import zwcad_path, zwcad_args
 from .common import acquire_file_list
-from .common import logger
+from .common import logger, db_table
 
 
 class WorkingThread(StoppableThread):
-    # TIME_INTERVAL = timedelta(minutes=30)
-    TIME_INTERVAL = timedelta(seconds=30)
+    TIME_INTERVAL = timedelta(seconds=worker_time_interval)
 
     def __init__(self):
         super(WorkingThread, self).__init__()
@@ -50,7 +49,7 @@ class WorkingThread(StoppableThread):
                 if file.endswith(".dwg") or file.endswith(".dxf"):
                     path = str(Path(dirpath) / file).lower()
                     query_res = execute_sql(
-                        f'select id from entitycount where path = "{path}";'
+                        f'select id from {db_table} where path = "{path}";'
                     )
                     if len(query_res) != 0:
                         continue

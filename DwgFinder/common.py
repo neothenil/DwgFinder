@@ -1,3 +1,5 @@
+import os
+import json
 import logging
 import threading
 import sqlite3
@@ -5,6 +7,10 @@ from pathlib import Path
 from typing import List, Tuple
 from contextlib import contextmanager
 
+
+config_file = Path(os.getcwd()) / "config.json"
+with open(config_file) as f:
+    config = json.load(f)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -17,20 +23,14 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
-db_path = "D:\\test.db"
-watched_path = "D:\\testFiles\\"
+db_path = config["db_path"]
+db_table = config["db_table"]
+watched_path = config["watched_path"]
+zwcad_path = Path(config["zwcad_exe"])
 zrx_path = Path(__file__).parent / "bin" / "CountEntity.zrx"
-zwcad_path = Path(r"D:\Program Files\ZWSOFT\ZWCAD 2023\ZWCAD.exe")
-zwcad_args = [
-    "/company",
-    "ZWSoft",
-    "/product",
-    "zwcad",
-    "/language",
-    "en-US",
-    "/ld",
-    f'"{zrx_path}"',
-]
+zwcad_args = config["zwcad_args"] + ["/ld", f'"{zrx_path}"']
+zwcad_window_title = config["zwcad_window_title"]
+worker_time_interval = config["worker_time_interval"]
 
 filesToScan = []
 filesToScanLocker = threading.Lock()

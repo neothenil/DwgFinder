@@ -78,5 +78,5 @@ void countEntityCmd()
 	
 	result.finalize();
 	result.print();
-	result.insertToDb("D:\\test.db");
+	result.insertToDb(gConfig["db_path"].GetString());
 }

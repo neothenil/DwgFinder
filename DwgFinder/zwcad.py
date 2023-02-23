@@ -7,6 +7,8 @@ from typing import List
 from . import uiautomation as auto
 from .ObjectRepo import *
 
+from .common import zwcad_window_title
+
 
 class ZwcadException(Exception):
     pass
@@ -18,7 +20,7 @@ class ZwcadStartException(ZwcadException):
 
 class Zwcad:
     def __init__(
-        self, exe_path: str, args=None, window_title=".*ZWCAD 2023 Pro.*", timeout=60
+        self, exe_path: str, args=None, window_title=zwcad_window_title, timeout=60
     ) -> None:
         command = [exe_path]
         if args is not None:

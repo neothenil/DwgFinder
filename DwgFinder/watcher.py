@@ -3,7 +3,7 @@ from typing import List, Tuple
 from watchdog.events import PatternMatchingEventHandler
 from watchdog.observers import Observer
 
-from .common import logger
+from .common import logger, db_table
 from .common import acquire_file_list
 from .common import watched_path
 from .common import execute_sql
@@ -46,10 +46,10 @@ class DwgFileEventHanlder(PatternMatchingEventHandler):
                 logger.debug("filesToScan = " + str(file_list))
                 return
         # search from db
-        res = execute_sql(f'select id from entitycount where path = "{path}";')
+        res = execute_sql(f'select id from {db_table} where path = "{path}";')
         if len(res) == 0:
             return
-        execute_sql(f'delete from entitycount where path = "{path}";')
+        execute_sql(f'delete from {db_table} where path = "{path}";')
 
     def append_to_file_list(self, path):
         path = path.lower()

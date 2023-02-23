@@ -88,7 +88,8 @@ void CountEntityResult::insertToDb(const std::string& dbPath) const
 		strValuesBuffer << ", " << mCounter.at(className);
 	}
 
-	sql = std::string("INSERT INTO EntityCount (") + strColumnsBuffer.str() + ") "
+	sql = std::string("INSERT INTO ") + gConfig["db_table"].GetString()
+		+ " (" + strColumnsBuffer.str() + ") "
 		+ std::string("VALUES (") + strValuesBuffer.str() + ");";
 
 	//acutPrintf(_T("\nSQL string: %s"), AcString(sql.c_str(), AcString::Utf8).kTCharPtr());

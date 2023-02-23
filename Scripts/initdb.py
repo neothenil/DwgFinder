@@ -1,9 +1,13 @@
 import sqlite3
-from typing import List
+import json
 
-dbPath: str = "D:\\test.db"
-tableName: str = "EntityCount"
-tableColumns: List[str] = []
+config_file = Path(os.getcwd()) / "config.json"
+with open(config_file) as f:
+    config = json.load(f)
+
+dbPath = config["db_path"]
+tableName = config["db_table"]
+tableColumns = []
 
 
 def readTableColumns():

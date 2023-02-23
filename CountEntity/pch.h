@@ -23,8 +23,11 @@
 #include "acdocman.h"
 #include "acarray.h"
 #include "adscodes.h"
+#include "rapidjson/document.h"
 
 #define cmd_group_name _T("CountEntity")
+
+extern rapidjson::Document gConfig;
 
 
 #endif //PCH_H
