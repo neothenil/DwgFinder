@@ -1,7 +1,7 @@
 {
     "db_path": "D:/test.db",
     "db_table": "EntityCount",
-    "watched_path": "D:/testFiles",
+    "watched_path": "D:\\testFiles",
     "zwcad_exe": "D:/Program Files/ZWSOFT/ZWCAD 2023/ZWCAD.exe",
     "zwcad_args": [
         "/company",
