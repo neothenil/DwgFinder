@@ -21,7 +21,7 @@ from .db import get_db, close_db, tableColumns, tableColumnsNoCase
 
 
 config_file = Path(os.getcwd()) / "config.json"
-with open(config_file) as f:
+with open(config_file, encoding="utf8") as f:
     config = json.load(f)
 
 app = Flask(__name__)

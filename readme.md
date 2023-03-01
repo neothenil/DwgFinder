@@ -25,7 +25,7 @@ left_expression OPERATOR right_expression
 例如，可以使用如下语句进行搜索:
 ```
 AcDbEntity > 1000000
-AcDbText + AcDbMText > 10000;
+AcDbText + AcDbMText > 10000
 ```
 
 运算符包含主要下面几种：
@@ -85,7 +85,7 @@ poetry install --no-root
 `db_path`：SQLite数据库文件的位置；  
 `db_table`：数据库表名；  
 `watched_path`：监控的包含图纸文件的文件夹路径；  
-`zwcad_exe`：ZWCAD可执行文件路径（必须为英文版）；  
+`zwcad_exe`：ZWCAD可执行文件路径（必须为英文专业版，需要激活）；  
 `zwcad_args`：ZWCAD的启动参数；  
 `zwcad_window_title`: 与ZWCAD主窗口title匹配的正则表达式，一般只需改动年度即可；  
 `worker_time_interval`: 进入待命阶段之后工作线程唤醒的时间间隔，单位为秒；  
