@@ -77,6 +77,11 @@ class WorkingThread(StoppableThread):
             self.start_zwcad()
         if not psutil.pid_exists(self.zwcad.process.pid):
             self.start_zwcad()
+        crash_proc = self.zwcad.crashed()
+        if crash_proc:
+            crash_proc.terminate()
+            self.zwcad.terminate()
+            self.start_zwcad()
 
     def start_zwcad(self):
         self.zwcad = Zwcad(zwcad_path, zwcad_args)

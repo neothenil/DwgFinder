@@ -3,8 +3,9 @@ import json
 import logging
 import threading
 import sqlite3
+import psutil
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Union
 from contextlib import contextmanager
 
 
@@ -56,3 +57,10 @@ def execute_sql(sql: str) -> List[Tuple]:
     db.commit()
     db.close()
     return res
+
+
+def find_exe(name: str) -> Union[bool, psutil.Process]:
+    for proc in psutil.process_iter():
+        if proc.name().lower() == name.lower():
+            return proc
+    return False

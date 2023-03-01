@@ -2,12 +2,13 @@ import subprocess
 import time
 import psutil
 import _ctypes
-from typing import List
+from typing import List, Union
 
 from . import uiautomation as auto
 from .ObjectRepo import *
 
 from .common import zwcad_window_title
+from .common import find_exe
 
 
 class ZwcadException(Exception):
@@ -84,6 +85,12 @@ class Zwcad:
 
     def terminate(self):
         self.process.terminate()
+
+    def crashed(self) -> Union[bool, psutil.Process]:
+        """
+        Test whether ZWCAD has crashed.
+        """
+        return find_exe("ZwCrashReport.exe")
 
     def wait_process(self, timeout=300):
         start_time = time.time()
