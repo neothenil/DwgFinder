@@ -10,7 +10,7 @@ from flask import (
     url_for,
     request,
     flash,
-    send_from_directory,
+    send_file,
     abort,
     current_app,
     stream_with_context,
@@ -81,13 +81,12 @@ def download(id: int):
     path = Path(result["Path"])
     if not path.exists():
         abort(404)
+    # Python 3.8 doesn't have `is_relative_to` method.
     try:
-        rel_path = path.relative_to(current_app.config["WATCHED_PATH"])
+        path.relative_to(current_app.config["WATCHED_PATH"])
     except:
         abort(404)
-    return send_from_directory(
-        current_app.config["WATCHED_PATH"], rel_path, as_attachment=True
-    )
+    return send_file(path, as_attachment=True)
 
 
 def clean_temp_files():
