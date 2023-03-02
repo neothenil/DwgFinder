@@ -81,7 +81,7 @@ void CountEntityResult::insertToDb(const std::string& dbPath) const
 	/* Create SQL statement */
 	std::string sql;
 	std::ostringstream strColumnsBuffer("path", std::stringstream::ate);
-	std::ostringstream strValuesBuffer("'" + mFilePath + "'", std::stringstream::ate);
+	std::ostringstream strValuesBuffer("\"" + mFilePath + "\"", std::stringstream::ate);
 
 	for (const auto& className : gClassNames) {
 		strColumnsBuffer << ", " << className;
