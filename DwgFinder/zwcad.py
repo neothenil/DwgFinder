@@ -1,10 +1,12 @@
 import subprocess
 import time
 import psutil
+import pyperclip
 import _ctypes
 from typing import List, Union
 
 from . import uiautomation as auto
+from pywinauto.keyboard import send_keys
 from .ObjectRepo import *
 
 from .common import zwcad_window_title
@@ -62,9 +64,13 @@ class Zwcad:
         """
         if not cmd:
             return
-        if not cmd.endswith("{ENTER}"):
-            cmd += "{ENTER}"
-        self.commandline.SendKeys(cmd)
+        # Some characters can not be sent with uiautomation's `SendKeys`.
+        # But can be sent with copyclip mechanism.
+        pyperclip.copy(cmd)
+        self.commandline.Click()
+        time.sleep(0.1)
+        send_keys("^v")
+        self.commandline.SendKeys("{ENTER}")
 
     def invoke(self, cmdList: List[str]):
         """
@@ -92,7 +98,7 @@ class Zwcad:
         """
         return find_exe("ZwCrashReport.exe")
 
-    def wait_process(self, timeout=300):
+    def wait_process(self, timeout=120):
         start_time = time.time()
         while time.time() - start_time < int(timeout):
             if self.window.WindowControl(SubName=Message.Name_QTPTest).Exists(
