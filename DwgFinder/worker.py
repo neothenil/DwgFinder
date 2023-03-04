@@ -77,11 +77,6 @@ class WorkingThread(StoppableThread):
             self.start_zwcad()
         if not psutil.pid_exists(self.zwcad.process.pid):
             self.start_zwcad()
-        crash_proc = self.zwcad.crashed()
-        if crash_proc:
-            crash_proc.terminate()
-            self.zwcad.terminate()
-            self.start_zwcad()
 
     def start_zwcad(self):
         self.zwcad = Zwcad(zwcad_path, zwcad_args)
@@ -91,7 +86,12 @@ class WorkingThread(StoppableThread):
         with auto.UIAutomationInitializerInThread():
             self.ensure_zwcad_started()
             self.zwcad.invoke(["countEntity", str(path).lower()])
-            self.zwcad.wait_process()
+            if not self.zwcad.wait_process():
+                crash_proc = self.zwcad.crashed()
+                if crash_proc:
+                    crash_proc.terminate()
+                self.zwcad.terminate()
+                self.zwcad = None
 
 
 def start_worker() -> WorkingThread:
