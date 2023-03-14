@@ -43,7 +43,7 @@ void CountEntityResult::finalize()
 
 void CountEntityResult::addOne(const std::string& className)
 {
-	if (mCounter.find(className) == std::cend(mCounter)) {
+	if (mCounter.find(className) == std::end(mCounter)) {
 		mUncountedClasses.insert(className);
 		return;
 	}
@@ -102,7 +102,6 @@ void CountEntityResult::insertToDb(const std::string& dbPath) const
 		sqlite3_free(zErrMsg);
 	}
 	sqlite3_close(db);
-	return;
 }
 
 bool CountEntityResult::hasSubClass(const std::string& className) const

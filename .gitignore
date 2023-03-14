@@ -1,5 +1,6 @@
 .vs/
 .vscode/
 CountEntity/Out/
+DwgRead/x64/
 
 __pycache__/
