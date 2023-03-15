@@ -23,6 +23,7 @@ logging.basicConfig(
     ],
 )
 logger = logging.getLogger()
+loggerLocker = threading.Lock()
 
 db_path = config["db_path"]
 db_table = config["db_table"]
@@ -32,6 +33,8 @@ zrx_path = Path(__file__).parent / "bin" / "CountEntity.zrx"
 zwcad_args = config["zwcad_args"] + ["/ld", f'"{zrx_path}"']
 zwcad_window_title = config["zwcad_window_title"]
 worker_time_interval = config["worker_time_interval"]
+
+dwgread_path = Path(__file__).parent / "bin" / "DwgRead.exe"
 
 filesToScan = []
 filesToScanLocker = threading.Lock()
@@ -47,6 +50,15 @@ def acquire_file_list():
         yield filesToScan
     finally:
         filesToScanLocker.release()
+
+
+@contextmanager
+def acquire_logger():
+    loggerLocker.acquire()
+    try:
+        yield logger
+    finally:
+        loggerLocker.release()
 
 
 def execute_sql(sql: str) -> List[Tuple]:

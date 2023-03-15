@@ -1,18 +1,14 @@
 import os
-import psutil
 import time
 from pathlib import Path
 from watchdog.utils import BaseThread as StoppableThread
 from datetime import datetime, timedelta
 
-from . import uiautomation as auto
-
-from .zwcad import Zwcad
+from .reader import Reader
 from .common import watched_path, worker_time_interval
 from .common import execute_sql
-from .common import zwcad_path, zwcad_args
-from .common import acquire_file_list
-from .common import logger, db_table
+from .common import acquire_file_list, acquire_logger
+from .common import db_table, dwgread_path
 
 
 class WorkingThread(StoppableThread):
@@ -20,7 +16,6 @@ class WorkingThread(StoppableThread):
 
     def __init__(self):
         super(WorkingThread, self).__init__()
-        self.zwcad = None
         self.last_wake_time = None
 
     def run(self):
@@ -40,7 +35,7 @@ class WorkingThread(StoppableThread):
     def walking_watched_path(self):
         if not self.should_keep_running():
             return
-        for dirpath, dirnames, filenames in os.walk(watched_path):
+        for dirpath, _, filenames in os.walk(watched_path):
             if not self.should_keep_running():
                 break
             for file in filenames:
@@ -54,9 +49,6 @@ class WorkingThread(StoppableThread):
                     if len(query_res) != 0:
                         continue
                     self.process_one_file(path)
-        if self.zwcad is not None:
-            self.zwcad.terminate()
-            self.zwcad = None
 
     def process_pending_files(self):
         if not self.should_keep_running():
@@ -68,30 +60,19 @@ class WorkingThread(StoppableThread):
             if not self.should_keep_running():
                 break
             self.process_one_file(file)
-        if self.zwcad is not None:
-            self.zwcad.terminate()
-            self.zwcad = None
-
-    def ensure_zwcad_started(self):
-        if self.zwcad is None:
-            self.start_zwcad()
-        if not psutil.pid_exists(self.zwcad.process.pid):
-            self.start_zwcad()
-
-    def start_zwcad(self):
-        self.zwcad = Zwcad(zwcad_path, zwcad_args)
 
     def process_one_file(self, path):
-        logger.info("Processing file %s" % path)
-        with auto.UIAutomationInitializerInThread():
-            self.ensure_zwcad_started()
-            self.zwcad.invoke(["countEntity", str(path).lower()])
-            if not self.zwcad.wait_process():
-                crash_proc = self.zwcad.crashed()
-                if crash_proc:
-                    crash_proc.terminate()
-                self.zwcad.terminate()
-                self.zwcad = None
+        with acquire_logger() as logger:
+            logger.info("Processing file %s" % path)
+        reader = Reader(dwgread_path, [path])
+        reader.execute()
+        result = reader.check_result()
+        if result[0] != True:
+            with acquire_logger() as logger:
+                if result[1]:
+                    logger.info(f"Failed to process file {path}: {result[1]}")
+                else:
+                    logger.info(f"Failed to process file {path}")
 
 
 def start_worker() -> WorkingThread:
