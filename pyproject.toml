@@ -7,14 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-comtypes = "^1.1"
-psutil = "^5.9.4"
 watchdog = "^2.2.1"
-pywin32 = "^305"
 flask = "^2.2.3"
 waitress = "^2.1.2"
-pyperclip = "^1.8.2"
-pywinauto = "^0.6.8"
 
 
 [build-system]

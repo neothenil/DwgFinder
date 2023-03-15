@@ -3,7 +3,6 @@ import json
 import logging
 import threading
 import sqlite3
-import psutil
 from pathlib import Path
 from typing import List, Tuple, Union
 from contextlib import contextmanager
@@ -28,12 +27,7 @@ loggerLocker = threading.Lock()
 db_path = config["db_path"]
 db_table = config["db_table"]
 watched_path = config["watched_path"]
-zwcad_path = Path(config["zwcad_exe"])
-zrx_path = Path(__file__).parent / "bin" / "CountEntity.zrx"
-zwcad_args = config["zwcad_args"] + ["/ld", f'"{zrx_path}"']
-zwcad_window_title = config["zwcad_window_title"]
 worker_time_interval = config["worker_time_interval"]
-
 dwgread_path = Path(__file__).parent / "bin" / "DwgRead.exe"
 
 filesToScan = []
@@ -69,10 +63,3 @@ def execute_sql(sql: str) -> List[Tuple]:
     db.commit()
     db.close()
     return res
-
-
-def find_exe(name: str) -> Union[bool, psutil.Process]:
-    for proc in psutil.process_iter():
-        if proc.name().lower() == name.lower():
-            return proc
-    return False
