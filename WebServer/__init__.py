@@ -1,5 +1,4 @@
 import os
-import json
 import zipfile
 import tempfile
 from pathlib import Path
@@ -17,12 +16,9 @@ from flask import (
     Response,
 )
 
+from .common import config
 from .db import get_db, close_db, tableColumns, tableColumnsNoCase
 
-
-config_file = Path(os.getcwd()) / "config.json"
-with open(config_file, encoding="utf8") as f:
-    config = json.load(f)
 
 app = Flask(__name__)
 app.config.from_mapping(

@@ -1,29 +1,9 @@
 import sqlite3
-from pathlib import Path
 from flask import current_app, g
 
-tableColumns = []
+from .common import config
 
-
-def readTableColumns():
-    with open(Path(__file__).parent.parent / "CountEntity/classInfo.cpp") as f:
-        lines = f.readlines()
-    startLine = 0
-    for lineNum, line in enumerate(lines):
-        if "gClassNames" in line:
-            startLine = lineNum + 1
-            break
-    i = startLine
-    while "};" not in lines[i]:
-        if lines[i].strip(' ",\r\n').startswith("//"):
-            i += 1
-            continue
-        className = lines[i].strip(' ",\r\n')
-        tableColumns.append(className)
-        i += 1
-
-
-readTableColumns()
+tableColumns = config["db_columns"]
 tableColumnsNoCase = list(map(lambda x: x.lower(), tableColumns))
 
 
