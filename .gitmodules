@@ -1,3 +1,0 @@
-[submodule "DwgFinder/ObjectRepo"]
-	path = DwgFinder/ObjectRepo
-	url = http://192.168.56.125:7990/scm/zwcad_t/objectrepo.git
