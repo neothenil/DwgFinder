@@ -22,9 +22,10 @@ class WorkingThread(StoppableThread):
         self.thread_pool = ThreadPoolExecutor(os.cpu_count() // 4 + 1)
         self.submission_semaphore = Semaphore(self.thread_pool._max_workers)
         self.unknown_failed_files = set()
-        self.worker_thread = current_thread()
+        self.worker_thread = None  # set when worker thread starts
 
     def run(self):
+        self.worker_thread = current_thread()
         self.walking_watched_path()
         while True:
             if not self.should_keep_running():
