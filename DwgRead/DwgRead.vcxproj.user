@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommand>D:\works\图纸检索工具\DwgFinder\DwgFinder\bin\DwgRead.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>D:\testFiles\LT-01┤║╞[┤╙«Γñu╡{╗í⌐·.dwg</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"d:\testfiles\הגשה אחרי ועדה.dwg"</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>D:\works\图纸检索工具\DwgFinder</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>

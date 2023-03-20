@@ -5,6 +5,8 @@
 #include "DbReaderManager.h"
 #include "sqlite3/sqlite3.h"
 
+const int retry_timeout = 5000;  // ms
+
 DbReaderManager::DbReaderManager()
 	: pDb(nullptr)
 {
@@ -92,17 +94,6 @@ std::tuple<bool, std::wstring> DbReaderManager::insertToDb(std::wstring dbPath)
 	std::tuple<bool, std::wstring> res;
 	int rc;
 
-	/* Open database */
-	rc = sqlite3_open(strDbPath.utf8Ptr(), &db);
-
-	if (rc) {
-		std::wstring errorMsg = _T("can't open database: ");
-		errorMsg += AcString(sqlite3_errmsg(db), AcString::Utf8).kTCharPtr();
-		errorMsg += _T("\n");
-		res = std::make_tuple(false, errorMsg);
-		return res;
-	}
-
 	/* Create SQL statement */
 	std::string sql;  // UTF8 encoded SQL statement
 	std::ostringstream strColumnsBuffer("path", std::stringstream::ate);
@@ -118,6 +109,18 @@ std::tuple<bool, std::wstring> DbReaderManager::insertToDb(std::wstring dbPath)
 	sql = std::string("INSERT INTO ") + gConfig["db_table"].GetString()
 		+ " (" + strColumnsBuffer.str() + ") "
 		+ std::string("VALUES (") + strValuesBuffer.str() + ");";
+
+	/* Open database */
+	rc = sqlite3_open(strDbPath.utf8Ptr(), &db);
+
+	if (rc) {
+		std::wstring errorMsg = _T("can't open database: ");
+		errorMsg += AcString(sqlite3_errmsg(db), AcString::Utf8).kTCharPtr();
+		errorMsg += _T("\n");
+		res = std::make_tuple(false, errorMsg);
+		return res;
+	}
+	sqlite3_busy_timeout(db, retry_timeout);
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql.c_str(), nullptr, 0, &zErrMsg);
