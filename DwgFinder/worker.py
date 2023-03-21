@@ -61,17 +61,7 @@ class WorkingThread(StoppableThread):
                         self.thread_pool.submit(self.process_one_file, path)
                     except RuntimeError:
                         pass  # ignore submit exception after ThreadPoolExecutor has been shut down
-        while self.submission_semaphore._value != self.thread_pool._max_workers:
-            if not self.should_keep_running():
-                return
-            # wait submitted task finished
-            time.sleep(0.5)
-        # retry for files failed by unknown error in the first pass
-        for file in self.unknown_failed_files.copy():
-            if not self.should_keep_running():
-                break
-            self.process_one_file(file)
-            self.unknown_failed_files.remove(file)
+        self.retry()
 
     def process_pending_files(self):
         if not self.should_keep_running():
@@ -88,17 +78,7 @@ class WorkingThread(StoppableThread):
                 self.thread_pool.submit(self.process_one_file, file)
             except RuntimeError:
                 pass  # ignore submit exception after ThreadPoolExecutor has been shut down
-        while self.submission_semaphore._value != self.thread_pool._max_workers:
-            if not self.should_keep_running():
-                return
-            # wait submitted task finished
-            time.sleep(0.5)
-        # retry for files failed by unknown error in the first pass
-        for file in self.unknown_failed_files.copy():
-            if not self.should_keep_running():
-                break
-            self.process_one_file(file)
-            self.unknown_failed_files.remove(file)
+        self.retry()
 
     def process_one_file(self, path):
         with acquire_logger() as logger:
@@ -121,6 +101,19 @@ class WorkingThread(StoppableThread):
         if current_thread() != self.worker_thread:
             # only manipulate semaphore when executed in thread pool
             self.submission_semaphore.release()
+
+    def retry(self):
+        while self.submission_semaphore._value != self.thread_pool._max_workers:
+            if not self.should_keep_running():
+                return
+            # wait submitted task finished
+            time.sleep(0.5)
+        # retry for files failed by unknown error in the first pass
+        for file in self.unknown_failed_files.copy():
+            if not self.should_keep_running():
+                break
+            self.process_one_file(file)
+            self.unknown_failed_files.remove(file)
 
     def on_thread_stop(self):
         self.thread_pool.shutdown()
