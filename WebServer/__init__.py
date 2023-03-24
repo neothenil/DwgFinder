@@ -1,5 +1,6 @@
 import os
 import zipfile
+import sqlite3
 import tempfile
 from pathlib import Path
 from flask import (
@@ -15,7 +16,6 @@ from flask import (
     stream_with_context,
     Response,
 )
-from werkzeug.exceptions import HTTPException
 
 from .common import config
 from .db import get_db, close_db, tableColumns, tableColumnsNoCase
@@ -65,9 +65,7 @@ def search():
     sql = f"select * from {config['db_table']} where {query}"
     try:
         pagination = Pagination(page, perpage, db=db, sql=sql)
-    except HTTPException as e:
-        raise e from None
-    except Exception as e:
+    except sqlite3.Error as e:
         flash(str(e))
         return redirect(url_for("index", q=query))
     return render_template(
