@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block links %}
-{% if result|length > 0 %}
+{% if pagination.items | length > 0 %}
 <a href="{{ url_for('download_by_query', query=query) }}" target="_blank">Download All</a>
 {% endif %}
 <a href="http://192.168.56.125:7990/projects/ZWCAD_W/repos/productmanage/browse/03-Tools/DwgFinder" target="_blank">Help</a>
@@ -25,7 +25,7 @@
   </tr>
   </thead>
   <tbody>
-  {% for row in result %}
+  {% for row in pagination.items %}
   <tr>
   {% for column in columns %}
     {% if column|lower() == "path" %}
@@ -43,5 +43,26 @@
   </div>
   </div>
   </div>
+  {% if pagination.total > config["ENTRY_PER_PAGE"] %}
+  <div class="footer">
+    <div class="pagination">
+      {% if pagination.has_prev %}
+      <a href="{{ url_for('search', q=query, page=pagination.prev_num) }}">&laquo;</a>
+      {% endif %}
+      {% for page in pagination.iter_pages() %}
+        {% if page is none %}
+        <a href="#">…</a>
+        {% elif page != pagination.page %}
+        <a href="{{ url_for('search', q=query, page=page) }}">{{ page }}</a>
+        {% else %}
+        <a href="{{ url_for('search', q=query, page=page) }}" class="active">{{ page }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if pagination.has_next %}
+      <a href="{{ url_for('search', q=query, page=pagination.next_num) }}">&raquo;</a>
+      {% endif %}
+    </div>
   </div>
+  {% endif %}
+</div>
 {% endblock %}

@@ -22,7 +22,7 @@ logging.basicConfig(
     ],
 )
 logger = logging.getLogger()
-loggerLocker = threading.Lock()
+loggerLock = threading.Lock()
 
 db_path = config["db_path"]
 db_table = config["db_table"]
@@ -31,7 +31,7 @@ worker_time_interval = config["worker_time_interval"]
 dwgread_path = Path(__file__).parent / "bin" / "DwgRead.exe"
 
 filesToScan = []
-filesToScanLocker = threading.Lock()
+filesToScanLock = threading.Lock()
 
 
 @contextmanager
@@ -39,20 +39,20 @@ def acquire_file_list():
     """
     Always use this function to manipulate `filesToScan` global variable.
     """
-    filesToScanLocker.acquire()
+    filesToScanLock.acquire()
     try:
         yield filesToScan
     finally:
-        filesToScanLocker.release()
+        filesToScanLock.release()
 
 
 @contextmanager
 def acquire_logger():
-    loggerLocker.acquire()
+    loggerLock.acquire()
     try:
         yield logger
     finally:
-        loggerLocker.release()
+        loggerLock.release()
 
 
 def execute_sql(sql: str) -> List[Tuple]:

@@ -15,9 +15,11 @@ from flask import (
     stream_with_context,
     Response,
 )
+from werkzeug.exceptions import HTTPException
 
 from .common import config
 from .db import get_db, close_db, tableColumns, tableColumnsNoCase
+from .pagination import Pagination
 
 
 app = Flask(__name__)
@@ -25,6 +27,7 @@ app.config.from_mapping(
     SECRET_KEY="fQ_yLyrcjLeyEFUqGw0Izw",
     DATABASE=config["db_path"],
     WATCHED_PATH=Path(config["watched_path"]),
+    ENTRY_PER_PAGE=config["entry_per_page"],
 )
 app.teardown_appcontext(close_db)
 
@@ -55,15 +58,21 @@ def search():
         else:
             if tableColumns[index] not in columns:
                 columns.append(tableColumns[index])
+    page = int(request.args.get("page", 1))
+    perpage = current_app.config["ENTRY_PER_PAGE"]
     db = get_db()
     # SQL injection vulnerable
-    sql = f"select * from {config['db_table']} where {query};"
+    sql = f"select * from {config['db_table']} where {query}"
     try:
-        result = db.execute(sql).fetchall()
+        pagination = Pagination(page, perpage, db=db, sql=sql)
+    except HTTPException as e:
+        raise e from None
     except Exception as e:
         flash(str(e))
         return redirect(url_for("index", q=query))
-    return render_template("result.html", query=query, columns=columns, result=result)
+    return render_template(
+        "result.html", query=query, columns=columns, pagination=pagination
+    )
 
 
 @app.route("/download/<int:id>")

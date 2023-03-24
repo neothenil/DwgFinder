@@ -77,6 +77,7 @@
         "AcDbDwfReference",
         "AcDbPdfReference"
     ],
+    "entry_per_page": 50,
     "watched_path": "D:\\testFiles",
     "worker_time_interval": 30
 }
