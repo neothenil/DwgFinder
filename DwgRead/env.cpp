@@ -48,7 +48,10 @@ bool initConfig()
 	if (!CFile::GetStatus(configPath, status) || status.m_attribute == CFile::directory) {
 		return false;
 	}
-	CFile configFile(configPath, CFile::modeRead);
+	CFile configFile;
+	if (!configFile.Open(configPath, CFile::shareDenyWrite)) {
+		return false;
+	}
 	ULONGLONG fileSize = configFile.GetLength();
 	auto content = new char[fileSize + 1];
 	configFile.Read(content, static_cast<UINT>(fileSize) + 1);
@@ -56,6 +59,9 @@ bool initConfig()
 	content[fileSize] = '\0';
 	gConfig.Parse(content);
 	delete[] content;
+	if (gConfig.GetType() != rapidjson::kObjectType) {
+		return false;
+	}
 	// TODO: Validate config file.
 	return true;
 }
