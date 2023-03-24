@@ -49,7 +49,7 @@
       {% if pagination.has_prev %}
       <a href="{{ url_for('search', q=query, page=pagination.prev_num) }}">&laquo;</a>
       {% endif %}
-      {% for page in pagination.iter_pages() %}
+      {% for page in pagination.iter_pages(right_current=2, left_edge=1, right_edge=1) %}
         {% if page is none %}
         <a href="#">…</a>
         {% elif page != pagination.page %}
