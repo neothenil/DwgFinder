@@ -4,6 +4,7 @@
 #include "DbReaderManager.h"
 #include "CountEntityReader.h"
 #include "FindGroupReader.h"
+#include "SymbolTableReader.h"
 
 int wmain(int argc, wchar_t* argv[])
 {
@@ -26,6 +27,7 @@ int wmain(int argc, wchar_t* argv[])
 	std::wstring dwgPath = argv[1];
 	DbReaderManager dbrMgr;
 	dbrMgr.registerReader(&countEntity);
+	dbrMgr.registerReader(&symbolTableReader);
 	dbrMgr.registerReader(&findGroup);
 	auto [ok1, err1] = dbrMgr.read(argv[1]);
 	if (!ok1) {

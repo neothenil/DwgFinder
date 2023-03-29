@@ -143,6 +143,7 @@
     <ClCompile Include="FindGroupReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sqlite3\sqlite3.c" />
+    <ClCompile Include="SymbolTableReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CountEntityReader.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="rapidjson\stringbuffer.h" />
     <ClInclude Include="rapidjson\writer.h" />
     <ClInclude Include="sqlite3\sqlite3.h" />
+    <ClInclude Include="SymbolTableReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

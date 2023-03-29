@@ -76,7 +76,16 @@
         "AcDbDgnReference",
         "AcDbDwfReference",
         "AcDbPdfReference",
-        "AcDbArcAlignedText"
+        "AcDbArcAlignedText",
+        "BlockTableRecord",
+        "LayerTableRecord",
+        "TextStyleTableRecord",
+        "LinetypeTableRecord",
+        "ViewTableRecord",
+        "UCSTableRecord",
+        "ViewportTableRecord",
+        "RegAppTableRecord",
+        "DimStyleTableRecord"
     ],
     "entry_per_page": 50,
     "watched_path": "D:\\testFiles",
