@@ -86,7 +86,8 @@ const std::vector<std::wstring> gClassNames = {
     L"AcDbUnderlayReference",
     L"AcDbDgnReference",
     L"AcDbDwfReference",
-    L"AcDbPdfReference"
+    L"AcDbPdfReference",
+    L"AcDbArcAlignedText"
 };
 
 const std::map<std::wstring, std::vector<std::wstring>> gSubclassMap = {
@@ -97,7 +98,7 @@ const std::map<std::wstring, std::vector<std::wstring>> gSubclassMap = {
                      L"AcDbCurve", L"AcDbDimension", L"AcDb3dSolid", L"AcDbBody", L"AcDbRegion",
                      L"AcDbSubDMesh", /* L"AcDbBlockBegin", L"AcDbBlockEnd", L"AcDbSequenceEnd", */
                      L"AcDbSurface", /* L"AcDbVertex", */ L"AcDbViewBorder", L"AcDbViewSymbol",
-                     L"AcDbUnderlayReference"}},
+                     L"AcDbUnderlayReference", L"AcDbArcAlignedText"}},
     {L"AcDbBlockReference", {L"AcDbMInsertBlock", L"AcDbTable", L"AcDbViewRepBlockReference"}},
     {L"AcDbFrame", {L"AcDbOleFrame"}},
     {L"AcDbOleFrame", {L"AcDbOle2Frame"}},
@@ -114,8 +115,8 @@ const std::map<std::wstring, std::vector<std::wstring>> gSubclassMap = {
                       L"AcDbRevolvedSurface", L"AcDbSweptSurface"}},
                       /* {L"AcDbVertex", {L"AcDb2dVertex", L"AcDb3dPolylineVertex", L"AcDbFaceRecord", L"AcDbPolyFaceMeshVertex",
                                           L"AcDbPolygonMeshVertex"}}, */
-                      {L"AcDbViewSymbol", {L"AcDbDetailSymbol", L"AcDbSectionSymbol"}},
-                      {L"AcDbUnderlayReference", {L"AcDbDgnReference", L"AcDbDwfReference", L"AcDbPdfReference"}}
+    {L"AcDbViewSymbol", {L"AcDbDetailSymbol", L"AcDbSectionSymbol"}},
+    {L"AcDbUnderlayReference", {L"AcDbDgnReference", L"AcDbDwfReference", L"AcDbPdfReference"}}
 };
 
 CountEntityReader countEntity;
@@ -134,7 +135,7 @@ CountEntityReader::~CountEntityReader()
 std::tuple<bool, std::wstring> CountEntityReader::read(AcDbDatabase* pDb)
 {
     std::tuple<bool, std::wstring> res;
-    // 打开块表
+    // 鎵撳紑鍧楄〃
     AcDbBlockTable* pBlockTable = nullptr;
     if (Acad::eOk != pDb->getBlockTable(pBlockTable, AcDb::kForRead) || !pBlockTable) {
         res = std::make_tuple(false, _T("failed to get block table"));
@@ -143,7 +144,7 @@ std::tuple<bool, std::wstring> CountEntityReader::read(AcDbDatabase* pDb)
     AcDbBlockTableIterator* pBtIter = nullptr;
     pBlockTable->newIterator(pBtIter);
     for (; !pBtIter->done(); pBtIter->step()) {
-        // 打开块表记录
+        // 鎵撳紑鍧楄〃璁板綍
         AcDbBlockTableRecord* pBtr = nullptr;
         pBtIter->getRecord(pBtr);
         if (!pBtr)
@@ -155,7 +156,7 @@ std::tuple<bool, std::wstring> CountEntityReader::read(AcDbDatabase* pDb)
         AcDbBlockTableRecordIterator* pBtrIter = nullptr;
         pBtr->newIterator(pBtrIter);
         for (; !pBtrIter->done(); pBtrIter->step()) {
-            // 打开实体
+            // 鎵撳紑瀹炰綋
             AcDbEntity* pEnt = nullptr;
             pBtrIter->getEntity(pEnt);
             if (!pEnt)

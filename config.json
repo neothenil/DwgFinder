@@ -75,7 +75,8 @@
         "AcDbUnderlayReference",
         "AcDbDgnReference",
         "AcDbDwfReference",
-        "AcDbPdfReference"
+        "AcDbPdfReference",
+        "AcDbArcAlignedText"
     ],
     "entry_per_page": 50,
     "watched_path": "D:\\testFiles",
