@@ -3,9 +3,9 @@
 #include "dbmain.h"
 #include "DbReaderManager.h"
 #include "CountEntityReader.h"
-#include "FindGroupReader.h"
 #include "SymbolTableReader.h"
 #include "NamedObjectDictReader.h"
+#include "DynBlockReader.h"
 
 int wmain(int argc, wchar_t* argv[])
 {
@@ -29,8 +29,8 @@ int wmain(int argc, wchar_t* argv[])
 	DbReaderManager dbrMgr;
 	dbrMgr.registerReader(&countEntity);
 	dbrMgr.registerReader(&symbolTableReader);
-	dbrMgr.registerReader(&findGroup);
 	dbrMgr.registerReader(&namedObjectDictReader);
+	dbrMgr.registerReader(&dynBlockReader);
 	auto [ok1, err1] = dbrMgr.read(argv[1]);
 	if (!ok1) {
 		std::wcerr << _T("Read file ") << dwgPath << _T(" failed: ") << err1 << std::endl;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -139,8 +139,9 @@
   <ItemGroup>
     <ClCompile Include="CountEntityReader.cpp" />
     <ClCompile Include="DbReaderManager.cpp" />
+    <ClCompile Include="DynBlockReader.cpp" />
     <ClCompile Include="env.cpp" />
-    <ClCompile Include="FindGroupReader.cpp" />
+    <ClCompile Include="DumbReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NamedObjectDictReader.cpp" />
     <ClCompile Include="sqlite3\sqlite3.c" />
@@ -150,8 +151,9 @@
     <ClInclude Include="CountEntityReader.h" />
     <ClInclude Include="DbReader.h" />
     <ClInclude Include="DbReaderManager.h" />
+    <ClInclude Include="DynBlockReader.h" />
     <ClInclude Include="env.h" />
-    <ClInclude Include="FindGroupReader.h" />
+    <ClInclude Include="DumbReader.h" />
     <ClInclude Include="NamedObjectDictReader.h" />
     <ClInclude Include="rapidjson\allocators.h" />
     <ClInclude Include="rapidjson\document.h" />

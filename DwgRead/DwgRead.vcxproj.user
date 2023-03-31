@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommand>D:\works\图纸检索工具\DwgFinder\DwgFinder\bin\DwgRead.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>"d:\testfiles\הגשה אחרי ועדה.dwg"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"D:\works\图纸检索工具\动态块.dwg"</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>D:\works\图纸检索工具\DwgFinder</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
@@ -12,7 +12,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommand>D:\works\图纸检索工具\DwgFinder\DwgFinder\bin\DwgRead.exe</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>"d:\testfiles\mline2.dwg"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"d:\testfiles\test_user12.dwg"</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>D:\works\图纸检索工具\DwgFinder</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

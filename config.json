@@ -100,7 +100,9 @@
         "ScaleList",
         "SectionViewStyle",
         "TableStyle",
-        "VisualStyle"
+        "VisualStyle",
+        "DynBlockDefinition",
+        "DynBlockReference"
     ],
     "entry_per_page": 50,
     "watched_path": "D:\\testFiles",
