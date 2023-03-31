@@ -22,7 +22,7 @@ private:
 private:
 	std::map<std::wstring, unsigned int> result;
 	std::map<std::wstring, unsigned int> cache;
-	std::set<std::wstring> uncountedClass;
+	unsigned int numCustomEntities;
 };
 
 extern CountEntityReader countEntity;

@@ -121,7 +121,7 @@ const std::map<std::wstring, std::vector<std::wstring>> gSubclassMap = {
 
 CountEntityReader countEntity;
 
-CountEntityReader::CountEntityReader()
+CountEntityReader::CountEntityReader() : numCustomEntities(0)
 {
     for (const auto& className : gClassNames) {
         result[className] = 0;
@@ -177,7 +177,8 @@ std::tuple<bool, std::wstring> CountEntityReader::read(AcDbDatabase* pDb)
 
 const std::map<std::wstring, unsigned int>& CountEntityReader::getResult()
 {
-	return result;
+    result[L"CustomEntity"] = numCustomEntities;
+    return result;
 }
 
 void CountEntityReader::finalize()
@@ -195,11 +196,13 @@ void CountEntityReader::finalize()
 
 void CountEntityReader::addOne(const std::wstring& className)
 {
-    if (result.find(className) == std::end(result)) {
-        uncountedClass.insert(className);
+    // if this is a builtin class
+    if (result.find(className) != std::end(result)) {
+        result[className] += 1;
         return;
     }
-    result[className] += 1;
+    // if this is a custom class
+    numCustomEntities += 1;
 }
 
 bool CountEntityReader::hasSubClass(const std::wstring& className) const
