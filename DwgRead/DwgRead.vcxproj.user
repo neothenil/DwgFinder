@@ -9,4 +9,10 @@
   <PropertyGroup>
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerCommand>D:\works\图纸检索工具\DwgFinder\DwgFinder\bin\DwgRead.exe</LocalDebuggerCommand>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>"d:\testfiles\mline2.dwg"</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>D:\works\图纸检索工具\DwgFinder</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
 </Project>

@@ -142,6 +142,7 @@
     <ClCompile Include="env.cpp" />
     <ClCompile Include="FindGroupReader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NamedObjectDictReader.cpp" />
     <ClCompile Include="sqlite3\sqlite3.c" />
     <ClCompile Include="SymbolTableReader.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="DbReaderManager.h" />
     <ClInclude Include="env.h" />
     <ClInclude Include="FindGroupReader.h" />
+    <ClInclude Include="NamedObjectDictReader.h" />
     <ClInclude Include="rapidjson\allocators.h" />
     <ClInclude Include="rapidjson\document.h" />
     <ClInclude Include="rapidjson\encodedstream.h" />
