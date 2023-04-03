@@ -27,9 +27,6 @@
     <ClCompile Include="DbReaderManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FindGroupReader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="CountEntityReader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -40,6 +37,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="NamedObjectDictReader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DynBlockReader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DumbReader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AssocObjectReader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,9 +60,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CountEntityReader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FindGroupReader.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="sqlite3\sqlite3.h">
@@ -171,6 +174,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="NamedObjectDictReader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DynBlockReader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DumbReader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AssocObjectReader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2023_SP2_ZRXSDK\arxport;D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2023_SP2_ZRXSDK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2022_ZRXSDK\arxport;D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2022_ZRXSDK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -124,7 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2023_SP2_ZRXSDK\arxport;D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2023_SP2_ZRXSDK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2022_ZRXSDK\arxport;D:\Program Files\ZWSOFT\ZRXSDK\ZWCAD_2022_ZRXSDK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssocObjectReader.cpp" />
     <ClCompile Include="CountEntityReader.cpp" />
     <ClCompile Include="DbReaderManager.cpp" />
     <ClCompile Include="DynBlockReader.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="SymbolTableReader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssocObjectReader.h" />
     <ClInclude Include="CountEntityReader.h" />
     <ClInclude Include="DbReader.h" />
     <ClInclude Include="DbReaderManager.h" />

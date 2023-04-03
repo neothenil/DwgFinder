@@ -8,7 +8,7 @@ class Reader:
         self.args = args
         self.result = (False, "Not executed yet")
 
-    def execute(self, timeout: t.Union[int, float] = 60) -> None:
+    def execute(self, timeout: t.Union[int, float] = 120) -> None:
         args = [self.exe_path]
         if self.args is not None:
             args.extend(self.args)

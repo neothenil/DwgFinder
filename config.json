@@ -102,7 +102,10 @@
         "TableStyle",
         "VisualStyle",
         "DynBlockDefinition",
-        "DynBlockReference"
+        "DynBlockReference",
+        "AssocArray",
+        "ConstraintGroup",
+        "DrawingView"
     ],
     "entry_per_page": 50,
     "watched_path": "D:\\testFiles",
