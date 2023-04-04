@@ -77,8 +77,7 @@ void AssocObjectReader::findAssocObject(AcDbObjectId assocNetworkId)
         Acad::ErrorStatus es = acdbOpenObject(pAction, actionId);
         if (Acad::eOk != es)
             continue;
-        AcRxClass* pActionClass = pAction->isA();
-        if (pActionClass == AcDbAssoc2dConstraintGroup::desc()) {
+        if (pAction->isKindOf(AcDbAssoc2dConstraintGroup::desc())) {
             result[constraintGroupField] += 1;
             pAction->close();
             continue;

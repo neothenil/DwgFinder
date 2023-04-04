@@ -105,7 +105,8 @@
         "DynBlockReference",
         "AssocArray",
         "ConstraintGroup",
-        "DrawingView"
+        "DrawingView",
+        "MaxNestedBlockLevel"
     ],
     "entry_per_page": 50,
     "watched_path": "D:\\testFiles",

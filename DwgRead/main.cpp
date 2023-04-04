@@ -7,6 +7,7 @@
 #include "NamedObjectDictReader.h"
 #include "DynBlockReader.h"
 #include "AssocObjectReader.h"
+#include "NestedBlockLevelReader.h"
 
 int wmain(int argc, wchar_t* argv[])
 {
@@ -33,6 +34,7 @@ int wmain(int argc, wchar_t* argv[])
 	dbrMgr.registerReader(&namedObjectDictReader);
 	dbrMgr.registerReader(&dynBlockReader);
 	dbrMgr.registerReader(&assocObjectReader);
+	dbrMgr.registerReader(&nestedBlockLevelReader);
 	auto [ok1, err1] = dbrMgr.read(argv[1]);
 	if (!ok1) {
 		std::wcerr << _T("Read file ") << dwgPath << _T(" failed: ") << err1 << std::endl;

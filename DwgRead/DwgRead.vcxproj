@@ -145,6 +145,7 @@
     <ClCompile Include="DumbReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NamedObjectDictReader.cpp" />
+    <ClCompile Include="NestedBlockLevelReader.cpp" />
     <ClCompile Include="sqlite3\sqlite3.c" />
     <ClCompile Include="SymbolTableReader.cpp" />
   </ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="env.h" />
     <ClInclude Include="DumbReader.h" />
     <ClInclude Include="NamedObjectDictReader.h" />
+    <ClInclude Include="NestedBlockLevelReader.h" />
     <ClInclude Include="rapidjson\allocators.h" />
     <ClInclude Include="rapidjson\document.h" />
     <ClInclude Include="rapidjson\encodedstream.h" />
