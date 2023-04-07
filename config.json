@@ -1,5 +1,5 @@
 {
-    "db_path": "D:/test.db",
+    "db_path": "D:\\test.db",
     "db_table": "EntityCount",
     "db_columns": [
         "AcDbEntity",
