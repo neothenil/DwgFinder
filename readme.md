@@ -152,23 +152,23 @@ ORDER BY field1 ASC, field2 DESC
 | RegAppTableRecord | RegApp表记录个数 |
 | DimStyleTableRecord | 标注样式表记录个数 |
 
-#### 3. 命令对象词典记录数量
-该类型的字段记录了命令对象词典中常见记录的个数。
+#### 3. 命名对象词典记录数量
+该类型的字段记录了命名对象词典中常见记录的个数。
 
 | 字段名 | 含义 |
 | ----- | ---- |
-| Color | 命令对象词典中Color的记录个数 |
-| DataLink | 命令对象词典中DataLink的记录个数 |
-| DetailViewStyle | 命令对象词典中DetailViewStyle的记录个数 |
+| Color | 命名对象词典中Color的记录个数 |
+| DataLink | 命名对象词典中DataLink的记录个数 |
+| DetailViewStyle | 命名对象词典中DetailViewStyle的记录个数 |
 | Groups | 组的个数 |
 | Layout | 布局个数 |
 | Material | 材质个数 |
 | MLeaderStyle | 多重引线样式个数 |
 | MLineStyle | 多线样式个数 |
 | PlotSettings | 打印设置个数 |
-| PlotStyleName | 命令对象词典中PlotStyleName的记录个数 |
+| PlotStyleName | 命名对象词典中PlotStyleName的记录个数 |
 | ScaleList | 比例列表中的记录个数 |
-| SectionViewStyle | 命令对象词典中SectionViewStyle的记录个数 |
+| SectionViewStyle | 命名对象词典中SectionViewStyle的记录个数 |
 | TableStyle | 表格样式个数 |
 | VisualStyle | 视觉样式个数 |
 
