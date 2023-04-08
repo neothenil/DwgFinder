@@ -39,4 +39,22 @@
     {% block result %}
     {% endblock %}
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+  <script>
+    var download_link = document.getElementById("download");
+    var total_para = document.getElementById("total");
+    if (download_link && total_para) {
+      var total = Number(total_para.innerHTML);
+      if (total > 100) {
+        download_link.addEventListener("click",
+          function (event) {
+            event.preventDefault();
+            var res = confirm("搜索结果过多(>100)，全部下载可能耗时较长，请确认是否继续下载！");
+            if (res) {
+              window.open(this.href);
+            }
+          },
+          false);
+      }
+    }
+  </script>
 </html>
